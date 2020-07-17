@@ -1,0 +1,20 @@
+version: '3'
+services:
+  odb-web:
+    build: .
+    #command: tail -f /dev/null
+    ports:
+      - 3030:80
+    volumes:
+      - ./html:/var/www/html
+  mydb2:
+    image: ibmcom/db2
+    ports:
+      - 50000:50000
+    volumes:
+      - ./data:/database
+    environment:
+      LICENSE: accept
+      DB2INST1_PASSWORD: ChangeMe!
+      DBNAME: testdb
+    privileged: true
